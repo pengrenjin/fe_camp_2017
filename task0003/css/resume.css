@@ -1,0 +1,72 @@
+	/*整体的*/
+	*{
+		margin:0px;
+		padding: 0px;
+	}
+	.entire{
+		background-color: #eee;
+		width: 614px;
+		height: 767px;
+		border: 2px solid brown;
+		margin: 0 auto;
+	}
+	li,p{
+		font-family:Cursive,'Zapf Chancery';
+	}
+
+	/*左边的框*/
+	.left{
+		width: 240px;
+		
+		border-right: 2px solid green;
+		float: left;
+		background-color: #eee;
+	}
+	.left section{
+		margin-top: 20px;
+		border-top: 2px solid skyblue;
+	}
+	img{
+		width: 200px;
+		height: 200px;
+		border-radius:100px;
+		padding-top: 20px;
+		padding-left: 5px;
+	}
+	.name{
+		font-size: 25px;
+		word-spacing:2px; 
+		
+	}
+	p{text-align: center;}
+	.info{
+		margin-top: 20px;
+	}
+
+	ul li,h3{
+		padding-left: 20px;
+		list-style-type: none;
+
+	}
+
+
+	/*右边的框*/
+	.right{
+		float: left;
+		width: 370px;
+	}
+	.right section{
+		margin-bottom: 20px;
+		padding: 10px;
+
+		border-top: 2px solid yellow;
+	}
+	.right li{
+		margin: 15px 0;
+	}
+	.right p{
+		line-height: 40px;
+		word-wrap: break-word;
+		text-align: left;
+		padding-left: 20px;
+	}

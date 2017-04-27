@@ -1,0 +1,246 @@
+@charset "utf-8";
+/* CSS Document */
+a{text-decoration:none; color:black;}
+
+*{
+	margin:0px; padding:0px;
+	}
+#logo{
+	width:100%;
+	height:175px;
+	background-image:url(../images/back.jpg); 
+	background-size:contain;
+	background-repeat:repeat-x;
+    }
+
+#logo img{
+	width:900px;
+	height:80px;
+	display:block;
+	margin:auto;
+	}
+
+#logo .nav{
+	font-size:15px;
+	margin:auto;
+	width:900px;
+	height:300px;
+	background-image:url(../images/girlsday.jpg);
+	background-size:contain;
+	background-repeat:repeat-x;
+	/*background:#063;*/
+	}
+	
+#logo .nav ul{
+	background:#063;
+	padding:7px 0px;
+	}
+#logo .nav ul li{
+	width:64px;
+	height:16px;
+	list-style-type: none;
+	display: inline;
+	float: left;
+	margin-left:5px;
+	}
+
+#logo .nav .teshu_1{width:80px;}
+#logo .nav .teshu_2{width:48px;}
+
+#logo .nav ul li a{
+	display:block;
+	line-height:16px;
+	text-align:center;
+	}	
+	
+
+#logo ul li a:hover{color:#FFF; font-size:16px;}
+#logo ul li ul{visibility:hidden; display:block;}
+#logo ul li:hover ul{visibility:visible;}
+#logo ul li ul li{
+	clear:both;
+	list-style-type:none;
+	display:inline-block;
+	background:#063;
+    }
+	
+#logo ul li ul li a:hover{
+	color:#FFF; 
+	font-size:13px;
+    }
+/*logo层设计结束*/
+#content{
+	clear:both;
+	margin:0px auto;
+	margin-top:140px;
+	width:900px;
+	height:250px;	
+}
+	
+#content .left_1,.center_1,.right_1{
+	width:300px;
+	height:250px;
+	float:left;
+}
+
+	
+#content .left_1 .photo{
+	background-image:url(../images/yaowen.jpg);
+	background-size:contain;
+	background-repeat:repeat-x;
+}
+	
+#content .center_1 .photo{
+	background-image:url(../images/zhaunti1.png);
+	background-size:contain;
+	background-repeat:repeat-x;
+}
+
+#content .right_1 .photo{
+	background-image:url(../images/lilun.jpg);
+	background-size:contain;
+	background-repeat:repeat-x;
+}
+#content .photo{
+	width:300px;
+	height:30px;
+}
+
+
+
+#content .content_1{
+	width:300px;
+	height:220px;
+}
+
+#content .content_1 ul{
+	width:300px;
+	height:220px;
+}
+
+#content .content_1 ul li{
+	font-size:12px;
+	height:auto;
+	width:300px;
+	margin:22px 15px;
+}
+
+#content .left_2 {
+	width:300px;
+	height:90px;
+	clear:both;
+	float:left;
+}
+
+#content .left_2 .photo{
+	width:300px;
+	height:30px;
+	background-image:url(../images/daohang.jpg);
+	background-repeat:repeat-x;
+}
+
+#content .left_2 .content_2 ul{
+	width:300px;
+	height:60px;
+}
+#content .left_2 .content_2 ul li{
+	display:block;
+	height:30px;
+	width:50px;
+	list-style-type:none;
+	list-style-position:outside;
+	float:left;
+	font-size:12px;
+	margin:auto 5px;
+	line-height:30px;
+	text-align:center;
+}
+ .teshu_3 a:hover{
+	 color:#03C;
+	 text-decoration:underline;
+}
+
+#content .center_2 {
+	width:300px;
+	height:90px;
+	float:left;
+}
+#content .center_2 .photo{
+	width:300px;
+	height:30px;
+	background-image:url(../images/changyng.jpg);
+	background-repeat:repeat-x;
+}
+#content .center_2 .content_3 ul li{
+	list-style-type:none;
+	float:left;
+	display:block;
+	margin:7px 5px;
+}
+
+#content .right_2 {
+	width:300px;
+	height:90px;
+	float:left;
+}
+#content .right_2 .photo{
+	width:300px;
+	height:30px;
+	background-image:url(../images/lianjie.png);
+	background-repeat:repeat-x;
+}
+#content .right_2 .content_4 ul li{
+	list-style-type:none;
+	float:left;
+	display:block;
+	margin:7px 3px;
+	padding:2px;
+	font-size:12px;
+	border-left:solid #666 1px;
+}
+
+#content .bottom{
+	clear:both;
+	width:900px;
+	height:100px;
+}
+#content .bottom .photo{
+	background-image:url(../images/zhaunti1.png);
+	background-repeat:repeat-x;
+	float:left;
+	width:300px;
+	height:30px;
+	
+}
+
+#content .bottom .content_5{clear:both;}
+#content .bottom .content_5 ul li {
+	list-style-type:none;
+	display:inline;
+	margin-left:25px;
+}
+	
+#content .bottom .content_5 img{
+	width:200px;
+	height:60px;
+}
+
+#content .bottom_1{
+	margin-top:15px;
+	width:900px;
+	height:40px;
+	font-size:12px;
+	text-align:center;
+	background:#CCC;
+}
+#content .bottom_1 p{
+	padding-top:5px;
+	display:block;
+	
+}
+.bottom_1 p a:hover{ 
+	text-decoration:underline;
+	font-size:13px;
+}
+	
+
