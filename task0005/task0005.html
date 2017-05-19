@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PictureSwitch</title>
+    <style>
+    body{
+        background-image: url(images/xx-bg.png);
+    }
+        .img-box{
+            width: 350px;
+            height: 350px;
+            margin: 100px ;
+            float: left;
+            border: black;
+            position: relative;
+        }
+        .img-box img{
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            top: 0;
+            left: 0;
+        }
+        .btn-box{
+            width: 220px;
+            height: auto;
+            margin: 30px auto;
+            position: absolute;
+            top: 164px;
+            left: 540px;
+        }
+        .btn-box button{
+            background-image: url(images/btn-blue.png);
+            width: 200px;
+            height: 40px;
+            border: 1px solid #89cbdb;
+            background-color: #eee;
+            border-radius: 5px;
+            font-size: 28px;
+            margin: 0 15px;
+            color: #4c8bf5;
+            outline: none;
+        }
+
+        #XX{
+            background-image: url(images/btn-gray.png);
+        }
+        #BW{
+            margin-top: 100px;
+        }
+        .btn-box button:hover{
+            color: #3070e0;
+        }
+    </style>
+</head>
+<body id="bodybg">
+<div class="img-box">
+    <img id="img" src="images/xx1.png">
+</div>
+<div class="btn-box">
+    <button id="XX">小新</button>
+    <button id="BW">巴卫</button>
+</div>
+
+<!--最直接的方法-->
+<script>
+    var btn1=document.getElementById("XX");
+    var btn2=document.getElementById("BW");
+    var img=document.getElementById("img");
+    btn1.onclick=function(){
+        img.setAttribute("src","images/xx1.png");
+        document.body.style.backgroundImage="url(images/xx-bg.png)";
+        btn1.style.backgroundImage="url(images/btn-gray.png)";
+        btn2.style.backgroundImage="url(images/btn-blue.png)";
+    }
+    btn2.onclick=function(){
+        img.setAttribute("src","images/bw1.png");
+        document.body.style.backgroundImage="url(images/bw-bg.png)";
+        btn1.style.backgroundImage="url(images/btn-blue.png)";
+        btn2.style.backgroundImage="url(images/btn-gray.png)";
+    }
+</script>
+</body>
+</html>
