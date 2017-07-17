@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>handlock</title>
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		*{
+			padding:0px;
+			margin: 0px;
+		}
+        #main{
+            position: relative;
+        }
+        canvas{
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+	<div id="main" style="border: 1px blue solid">
+		<canvas id="myCanvas"  ></canvas>
+        <canvas id="myCanvas1" ></canvas>
+        <canvas id="myCanvas2" ></canvas>
+    </div>
+
+    <script type="text/javascript">
+/**全局变量的定义
+  *存储九个圆心的位置
+  *存储已经被选择的圆心的序号
+  *获取当前页面的宽度和高度并设置成main的宽和高
+  *取宽和高之间的小的值画正方形
+  */
+  var CW=400,CH=400,R=26,offset=150;
+  var ninePoints=[];
+  var selected=[];
+  CW=document.body.offsetWidth;
+  CH=document.body.offsetHeight;
+  var Main=document.getElementById('main');
+  Main.height=CH;
+  Main.width=CW;
+  var C=CW>CH?CH:CW;
+
+/**加载页面后完成以下功能
+  *获取画布
+       1、cxt画九个圆
+       2、cxt1画圆环
+       3、cxt2画线
+  *获取页面的宽度，计算出两个圆之间的距离；
+  *传入两个圆之间的距离，计算出圆心的位置；
+  *引入触摸函数并完成九宫格的绘制；
+  */
+  window.onload=function(){
+    var canvas=document.getElementById('myCanvas');
+    canvas.height = C;
+    canvas.width = C;
+    var cxt=canvas.getContext('2d');
+
+    var canvas1=document.getElementById('myCanvas1');
+    canvas1.height = C;
+    canvas1.width = C;
+    var cxt1=canvas1.getContext('2d');
+
+    var canvas2=document.getElementById('myCanvas2');
+    canvas2.height = C;
+    canvas2.width = C;
+    var cxt2=canvas2.getContext('2d');
+
+    var dis=(C-2*offset-2*3*R)/2;
+    ninePoints=caculatePoint(dis);
+    InitEvent(canvas2,cxt,cxt1,cxt2);     
+ }
+
+/**计算出圆心的位置
+*/
+function caculatePoint(diff){
+    var re=[];
+    for (var row = 0; row < 3; row++) {
+        for(var col = 0; col< 3; col++){
+            var Point={
+                X:(offset+col*diff+(2*col+1)*R),
+                Y:(offset+row*diff+(2*row+1)*R)
+            };
+            re.push(Point);
+        }
+    }
+    return re;
+}
+
+/**画圆
+  *取出圆心的位置,在cxt上画出九个圆；
+  *画圆的同时判断这个点是否被选择过，若已经选择，则在cxt1上画圆环;
+  *在cxt2上按顺序画线，并画出最后一个点与当前触摸点之间的线
+  */
+  function Draw(cxt,cxt1,cxt2,_ninePoints,_selected,_touchPoint){
+    //画圆，暂时把圆环的放在cxt1上，画实心圆放在cxt上
+    for (var i = 0; i < _ninePoints.length; i++) {
+        var Point = _ninePoints[i];
+        cxt.fillStyle = "#627eed";
+        cxt.beginPath();
+        cxt.arc(Point.X, Point.Y, R, 0, Math.PI * 2, true);
+        cxt.closePath();
+        cxt.fill();
+        if(_selected.indexOf(i)>=0){
+           cxt1.beginPath();
+           cxt1.strokeStyle = '#FFA500';
+           cxt1.arc(Point.X, Point.Y, R+R, 0, Math.PI * 2, true);
+           cxt1.stroke();
+           cxt1.closePath();
+       }
+   }
+
+    //画线操作在cxt2上完成
+    if(_selected.length>0){
+    //已经选择的点之间的画线
+    cxt2.beginPath();
+    for (var i = 0; i < _selected.length; i++) {
+            var pointIndex = _selected[i];//已选元素是第几个点
+            cxt2.lineTo(_ninePoints[pointIndex].X,_ninePoints[pointIndex].Y);
+        }
+        cxt2.lineWidth=5;
+        cxt2.strokeStyle="#627eed";
+        cxt2.stroke();
+        if(_touchPoint!=null){
+            var lastPointIndex=_selected[_selected.length-1];
+            var lastPoint=_ninePoints[lastPointIndex];
+            cxt2.beginPath();
+            cxt2.moveTo(lastPoint.X,lastPoint.Y);
+            cxt2.lineTo(_touchPoint.X,_touchPoint.Y);
+            cxt2.stroke();
+            cxt2.closePath();
+        }
+    }
+ }
+
+/**判断该点是否被选择
+  *计算当前触点与所有圆心的距离，判断是否有小于2R的
+  *若有小于2R的，判断该点是否被选择，若被选择，则不做处理；
+     若未被选择，则加入到_selected中
+     */
+     function IsSelected(touches){
+        for (var i = 0; i < ninePoints.length; i++) {
+            var currentPoint = ninePoints[i];
+            var x = Math.abs(currentPoint.X - touches.pageX);
+            var y = Math.abs(currentPoint.Y - touches.pageY);
+            var d = Math.pow((x * x + y * y), 0.5);
+            if (d < 2*R ) {
+                if(selected.indexOf(i) < 0){ 
+                    selected.push(i);
+                }
+                break;
+            }
+        }
+    }
+
+/**触摸事件的判断
+  *未触摸屏幕
+     1、没有触摸时要画出九宫格，所以传入的参数中是空数组，以及没有触摸位置
+  *开始触摸屏幕
+     1、判断起始触碰点是否可以选择圆心
+  *屏幕上滑动
+     1、阻止屏幕滚动
+     2、判断当前触碰点是否可以选择圆心
+     3、在屏幕滑动上的时候要不断刷新画布cxt2上的线条
+  *手指离开屏幕
+     1、手指离开时要去除最后一点到当前位置的线条
+     2、清空画布cxt1、2上的线
+     3、清空数组，为下一次画准备
+     */
+  function InitEvent(canvasContainer, cxt,cxt1,cxt2) {
+
+        //为触摸屏幕
+        Draw(cxt,cxt1,cxt2,ninePoints,[],null);
+
+        //开始触摸屏幕
+        canvasContainer.addEventListener("touchstart", function (e) {
+            IsSelected(e.touches[0]);
+        }, false);
+
+        //屏幕上滑动
+        canvasContainer.addEventListener("touchmove", function (e) {
+            e.preventDefault();
+            var touches = e.touches[0];
+            IsSelected(touches);
+            cxt2.clearRect(0,0,C,C);
+            Draw(cxt,cxt1,cxt2,ninePoints,selected,{X:touches.pageX,Y:touches.pageY});
+        }, false);
+
+        //手指离开屏幕
+        canvasContainer.addEventListener("touchend", function (e) {
+            Draw(cxt,cxt1,cxt2,ninePoints,selected,null);
+            cxt2.clearRect(0,0,C,C);
+            cxt1.clearRect(0,0,C,C);
+            alert("密码结果是："+selected.join("->"));
+            //清空数组；
+            selected=[];
+        }, false);
+    }
+
+   </script>
+</body>
+
+</html>
+
+
+
+
